@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Words I Want to Say to You, Habi 🍓</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffe6ec url('https://i.imgur.com/7FZpkjX.png') repeat;
+      font-family: 'Poppins', 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #5a2a27;
+      text-align: center;
+      transition: background 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.3em;
+      color: #e84c7f;
+      text-shadow: 2px 2px #ffc7d6;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #page {
+      width: 85%;
+      max-width: 650px;
+      background: #fff8f9;
+      border: 3px solid #ffb6c1;
+      border-radius: 25px;
+      padding: 35px;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    #page p {
+      font-size: 1.2em;
+      line-height: 1.7em;
+      color: #5a2a27;
+    }
+
+    #page.centered p {
+      text-align: center;
+      font-size: 1.4em;
+      color: #e84c7f;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #ff7ea5;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1em;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 5px #d45c80;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #ff9abf;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Words I Want to Say to You, Habi 🍓</h1>
+  <button id="startBtn">Continue</button>
+
+  <div id="page" style="display:none;"></div>
+
+  <audio id="bgMusic" src="On the Wings of Love - KYLA.mp3"></audio>
+
+  <script>
+    const pages = [
+      { text: "Alam mo, matagal ko nang gustong sabihin to, hindi para magpa-impress, hindi din para magpa-cute, pero para ipaalala sa’yo kung gaano ka kahalaga.", centered: true },
+      { text: "Alam kong may mga bagay sa nakaraan mo na minsan nagpaparamdam sa’yo na hindi ka sapat, na parang ang hirap maniwalang may taong makakakita ng worth mo ulit. Pero gusto kong sabihin sa’yo na you are more than your past." },
+      { text: "You’re not defined by what hurt you, by what you lost, or by who walked away. You are still the same beautiful, kind, and strong person — baka nga mas malakas ka na eh." },
+      { text: "Kung darating man ‘yung araw na makalimutan mo kung gaano ka kahalaga, andito lang ako. Hindi para pilitin kang ngumiti, pero para ipaalala sa’yo kung gaano ka dapat minamahal — ng mundo, ng sarili mo, at ng mga taong tunay na nagmamalasakit sa’yo." },
+      { text: "Habi, you deserve peace, happiness, and all the love you keep giving to others. At if you want, willing ako maging isa sa mga taong magpapaalala niyan sa’yo, araw-araw." },
+      { text: "Hindi mo kailangang maging perfect para maging worthy — kasi you already are. <br><br><b style='color:#e84c7f;'>— Mharkie 💌</b>" }
+    ];
+
+    const startBtn = document.getElementById("startBtn");
+    const pageDiv = document.getElementById("page");
+    const title = document.getElementById("title");
+    const music = document.getElementById("bgMusic");
+    let currentPage = 0;
+
+    startBtn.addEventListener("click", () => {
+      title.style.display = "none";
+      startBtn.style.display = "none";
+      pageDiv.style.display = "block";
+      showPage();
+      music.volume = 1.0;
+      music.play().catch(() => alert("Tap to allow music 🎵"));
+    });
+
+    function showPage() {
+      const page = pages[currentPage];
+      pageDiv.innerHTML = `
+        <div class="${page.centered ? 'centered' : ''}">
+          <p>${page.text}</p>
+        </div>
+        <button id="nextBtn">${currentPage === pages.length - 1 ? "💖" : "Continue"}</button>
+      `;
+      const nextBtn = document.getElementById("nextBtn");
+      nextBtn.addEventListener("click", nextPage);
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        pageDiv.style.animation = "fadeOut 0.5s ease";
+        setTimeout(() => {
+          currentPage++;
+          pageDiv.style.animation = "fadeIn 1s ease";
+          showPage();
+        }, 500);
+      } else {
+        pageDiv.innerHTML = "<p style='font-size:1.3em;color:#e84c7f;'>Thank you for reading, Habi 🍓</p>";
+      }
+    }
+  </script>
+
+</body>
+</html>
